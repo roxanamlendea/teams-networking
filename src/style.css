@@ -6,6 +6,7 @@ body {
   flex-direction: column;
   min-height: 100%;
   margin: 0;
+  background-color: #e9f6f8;
 }
 
 header {
@@ -28,6 +29,7 @@ header img {
 
 body > section {
   flex: 1;
+  padding: 15px;
 }
 
 h1 {
@@ -44,4 +46,23 @@ footer {
   color: #fff;
   text-align: center;
   padding: 7px;
+}
+
+#teamsTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+#teamsTable th,
+#teamsTable td {
+  border: 1px solid black;
+  padding: 6px;
+}
+
+#teamsTable th {
+  background-color: #057988;
+  color: white;
+}
+
+#teamsTable tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
