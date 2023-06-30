@@ -1,4 +1,4 @@
-console.warn("start app", 2 + 3);
+console.warn("start app");
 
 var nume = "roxana";
 console.info(nume);
