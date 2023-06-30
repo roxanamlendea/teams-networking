@@ -1,6 +1,3 @@
-console.warn("start app");
+import "./style.css";
 
-var nume = "roxana";
-console.info(nume);
-var a = "roxana";
-console.info(a);
+console.warn("start app");
