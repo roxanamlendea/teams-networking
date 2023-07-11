@@ -1,7 +1,6 @@
 html {
   height: 100%;
 }
-
 body {
   display: flex;
   flex-direction: column;
@@ -14,7 +13,6 @@ header {
   background-image: url(images/th.png);
   text-shadow: 1px 1px 2px #000000;
 }
-
 #header-wrapper {
   display: flex;
   flex-direction: row;
@@ -38,7 +36,6 @@ h1 {
   margin: 2px;
   color: #fff;
 }
-
 h2 {
   margin: 2px;
   color: #fff;
@@ -56,7 +53,6 @@ footer {
   margin-bottom: 10px;
   align-items: stretch;
 }
-
 .tfill {
   flex: 1;
 }
@@ -65,33 +61,27 @@ footer {
   border-collapse: collapse;
   width: 100%;
 }
-
 #teamsTable th,
 #teamsTable td {
-  border: 1px solid black;
-  padding: 6px;
+  padding: 5px;
+  border: 1px solid #057988;
 }
-
 #teamsTable th {
-  background-color: #057988;
-  color: white;
+  background-color: #0798ab;
+  color: #fff;
 }
-
 #teamsTable tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#teamsTable tfoot input {
+#teamsTable input[type="text"] {
   width: 100%;
-}
-
-#teamsTable tfoot input:not([type="image" i]) {
   box-sizing: border-box;
 }
 
 .edit-btn,
 .delete-btn {
-  color: #0096d6;
+  color: #02638d;
   cursor: pointer;
 }
 
@@ -99,7 +89,6 @@ footer {
   text-decoration: underline;
   color: #b90303;
 }
-
 .edit-btn:hover {
   text-decoration: underline;
   color: #039903;
