@@ -1,5 +1,7 @@
 import "./style.css";
 
+let allTeams = [];
+
 function $(selector) {
   return document.querySelector(selector);
 }
@@ -32,7 +34,7 @@ function getTeamAsHTML(team) {
     <td>${team.url}</td>
     <td>
      <a data-id="${team.id}" class="delete-btn">✖</a>
-     <a class="edit-btn">&#9998;</a>
+     <a data-id="${team.id}" class="edit-btn">&#9998;</a>
      </td>
 </tr>`;
 }
@@ -46,7 +48,10 @@ function renderTeams(teams) {
 function loadTeams() {
   fetch("http://localhost:3000/teams-json")
     .then(r => r.json())
-    .then(renderTeams);
+    .then(teams => {
+      allTeams = teams;
+      renderTeams(teams);
+    });
 }
 
 function onSubmit(e) {
@@ -70,19 +75,31 @@ function onSubmit(e) {
   });
 }
 
+function startEdit(id) {
+  console.warn("edit...%o", id, allTeams);
+  const team = allTeams.find(team => team.id === id);
+
+  console.warn(team.promotion);
+  $("#promotion").value = team.promotion;
+  $("#members").value = team.members;
+}
+
 function initEvents() {
   $("#teamsForm").addEventListener("submit", onSubmit);
 
   $("#teamsTable tbody").addEventListener("click", e => {
     if (e.target.matches("a.delete-btn")) {
       const id = e.target.dataset.id;
-      console.warn("delete...%o", id);
+      // console.warn("delete...%o", id);
       deleteTeamRequest(id).then(status => {
         // console.info("delete status %o", status);
         if (status.succes) {
           window.location.reload();
         }
       });
+    } else if (e.target.matches("a.edit-btn")) {
+      const id = e.target.dataset.id;
+      startEdit(id);
     }
   });
 }
