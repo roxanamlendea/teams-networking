@@ -45,7 +45,7 @@ function getTeamAsHTML(team) {
     <td>${team.url}</td>
     <td>
       <button data-id="${team.id}" class="action-btn edit-btn">&#9998;</button>
-      <button data-id="${team.id}" class="action-btn delete-btn">✖</button>
+      <button data-id="${team.id}" class="action-btn delete-btn">♻</button>
     </td>
   </tr>`;
 }
@@ -141,7 +141,7 @@ function startEdit(id) {
   console.warn("edit... %o", id, allTeams);
   //const team = allTeams.find(team => team.id === id);
   renderTeams(allTeams, id);
-  
+
   setInputsDisabled(true);
 }
 
@@ -156,7 +156,7 @@ function initEvents() {
   $("#teamsForm").addEventListener("reset", e => {
     console.info("reset", editId);
     if (editId) {
-      // console.warn("cancel");
+      // console.warn("cancel edit");
       renderTeams(allTeams);
       setInputsDisabled(false);
       editId = "";
