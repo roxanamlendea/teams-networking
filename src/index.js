@@ -107,6 +107,7 @@ function addTitlesToOverflowCells() {
   });
 }
 
+
 function loadTeams() {
   let url = "http://localhost:3000/teams-json";
   if (window.location.host === "roxanamlendea.github.io") {
@@ -186,7 +187,7 @@ function setInputsDisabled(disabled) {
 function filterElements(teams, search) {
   search = search.toLowerCase();
   return teams.filter(team => {
-    //console.info("filter %o in %o", search, team.promotion);
+    //console.info("search %o in %o", search, team.promotion);
     return (
       team.promotion.toLowerCase().includes(search) ||
       team.members.toLowerCase().includes(search) ||
@@ -200,7 +201,7 @@ function initEvents() {
   $("#search").addEventListener("input", e => {
     const search = e.target.value;
     const teams = filterElements(allTeams, search);
-    //console.info("search", search, teams);
+    console.info("search", search, teams);
     renderTeams(teams);
   });
 
@@ -210,6 +211,7 @@ function initEvents() {
     if (editId) {
       // console.warn("cancel edit");
       allTeams = [...allTeams];
+      renderTeams(allTeams);
       setInputsDisabled(false);
       editId = "";
     }
@@ -222,7 +224,7 @@ function initEvents() {
       deleteTeamRequest(id, status => {
         console.info("delete callback %o", status);
         if (status.success) {
-          // window.location.reload();
+          //window.location.reload();
           loadTeams();
         }
       });
