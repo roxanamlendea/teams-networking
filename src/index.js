@@ -252,3 +252,19 @@ function initEvents() {
 
 loadTeams();
 initEvents();
+
+function sleep(ms) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
+$("#teamsForm").classList.add("loading-mask");
+sleep(5000).then(() => {
+  console.warn("ready");
+  //$("#teamsForm").classList.add("loading-mask");
+});
+// const s = sleep(2000);
+// console.info("s", s);
