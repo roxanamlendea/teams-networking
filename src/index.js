@@ -46,8 +46,8 @@ function updateTeamRequest(team) {
 }
 
 function getTeamAsHTML(team) {
-  //const id = team.id;
-  //const url = team.url;
+  // const id = team.id;
+  // const url = team.url;
   const { id, url } = team;
   const displayUrl = url.startsWith("https://github.com/") ? url.substring(19) : url;
   return `<tr>
@@ -58,14 +58,13 @@ function getTeamAsHTML(team) {
       <a href="${url}" target="_blank">${displayUrl}</a>
     </td>
     <td>
-      <button type="button" data-id="${team.id}" class="action-btn edit-btn">&#9998;</button>
-      <button type="button" data-id="${team.id}" class="action-btn delete-btn">♻</button>
+      <button type="button" data-id="${id}" class="action-btn edit-btn">&#9998;</button>
+      <button type="button" data-id="${id}" class="action-btn delete-btn">♻</button>
     </td>
   </tr>`;
 }
 
-function getTeamAsHTMLInputs(team) {
-  const { promotion, members, name, url } = team;
+function getTeamAsHTMLInputs({ promotion, members, name, url }) {
   return `<tr>
     <td>
       <input value="${promotion}" type="text" name="promotion" placeholder="Enter Promotion" required/>
@@ -137,8 +136,8 @@ function getTeamValues(parent) {
   const name = $(`${parent} input[name=name]`).value;
   const url = $(`${parent} input[name=url]`).value;
   const team = {
-    promotion: promotion,
-    members: members,
+    promotion,
+    members,
     name,
     url
   };
@@ -155,13 +154,11 @@ function onSubmit(e) {
   if (editId) {
     team.id = editId;
     console.warn("update...", team);
-    updateTeamRequest(team).then(status => {
-      console.warn("updated", status);
-      if (status.success) {
+    updateTeamRequest(team).then(({ success }) => {
+      if (success) {
         allTeams = allTeams.map(t => {
           if (t.id === team.id) {
-            console.warn("updated %o -> %o", t, team);
-            //var a = { x:1, y: 2}; var b = { y:3, z: 4}; var c = { ...a, ...c}
+            //var a = { x: 1, y: 2 }; var b = { y: 3, z: 4 }; var c = { ...a, ...c };
             return {
               ...t,
               ...team
@@ -177,7 +174,6 @@ function onSubmit(e) {
     });
   } else {
     createTeamRequest(team).then(({ success, id }) => {
-      console.warn("created", status);
       if (success) {
         team.id = id;
         allTeams = [...allTeams, team];
@@ -205,13 +201,13 @@ function setInputsDisabled(disabled) {
 
 function filterElements(teams, search) {
   search = search.toLowerCase();
-  return teams.filter(team => {
+  return teams.filter(({ promotion, members, name, url }) => {
     //console.info("search %o in %o", search, team.promotion);
     return (
-      team.promotion.toLowerCase().includes(search) ||
-      team.members.toLowerCase().includes(search) ||
-      team.name.toLowerCase().includes(search) ||
-      team.url.toLowerCase().includes(search)
+      promotion.toLowerCase().includes(search) ||
+      members.toLowerCase().includes(search) ||
+      name.toLowerCase().includes(search) ||
+      url.toLowerCase().includes(search)
     );
   });
 }
