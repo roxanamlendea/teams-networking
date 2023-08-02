@@ -65,18 +65,19 @@ function getTeamAsHTML(team) {
 }
 
 function getTeamAsHTMLInputs(team) {
+  const { promotion, members, name, url } = team;
   return `<tr>
     <td>
-      <input value="${team.promotion}" type="text" name="promotion" placeholder="Enter Promotion" required/>
+      <input value="${promotion}" type="text" name="promotion" placeholder="Enter Promotion" required/>
     </td>
     <td>
-      <input value="${team.members}" type="text" name="members" placeholder="Enter Members" required />
+      <input value="${members}" type="text" name="members" placeholder="Enter Members" required />
     </td>
     <td>
-      <input value="${team.name}" type="text" name="name" placeholder="Enter Name" required />
+      <input value="${name}" type="text" name="name" placeholder="Enter Name" required />
     </td>
     <td>
-      <input value="${team.url}" type="text" name="url" placeholder="Enter URL" required />
+      <input value="${url}" type="text" name="url" placeholder="Enter URL" required />
     </td>
     <td>
       <button type="submit" class="action-btn" title="Save">💾</button>
@@ -175,10 +176,10 @@ function onSubmit(e) {
       }
     });
   } else {
-    createTeamRequest(team).then(status => {
+    createTeamRequest(team).then(({ success, id }) => {
       console.warn("created", status);
-      if (status.success) {
-        team.id = status.id;
+      if (success) {
+        team.id = id;
         allTeams = [...allTeams, team];
         renderTeams(allTeams);
         $("#teamsForm").reset();
