@@ -264,7 +264,7 @@ function sleep(ms) {
 $("#teamsForm").classList.add("loading-mask");
 sleep(5000).then(() => {
   console.warn("ready");
-  //$("#teamsForm").classList.add("loading-mask");
+  $("#teamsForm").classList.remove("loading-mask");
 });
-// const s = sleep(2000);
+// const s = sleep(4000);
 // console.info("s", s);
