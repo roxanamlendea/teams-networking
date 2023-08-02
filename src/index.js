@@ -46,7 +46,9 @@ function updateTeamRequest(team) {
 }
 
 function getTeamAsHTML(team) {
-  const url = team.url;
+  //const id = team.id;
+  //const url = team.url;
+  const { id, url } = team;
   const displayUrl = url.startsWith("https://github.com/") ? url.substring(19) : url;
   return `<tr>
     <td>${team.promotion}</td>
