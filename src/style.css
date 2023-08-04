@@ -89,6 +89,10 @@ footer {
   width: 90px;
 }
 
+.select-all-col {
+  width: 40px;
+}
+
 .action-btn {
   cursor: pointer;
   min-width: 34px;
