@@ -13,8 +13,8 @@ function getTeamAsHTML(team) {
   const { id, url } = team;
   const displayUrl = url.startsWith("https://github.com/") ? url.substring(19) : url;
   return `<tr>
-    <td style = "text-align:center"> 
-      <input type="checkbox" name="selectAll" value="${id}" />
+    <td style="text-align: center">
+      <input type="checkbox" name="selected" value="${id}" />
     </td>
     <td>${team.promotion}</td>
     <td>${team.members}</td>
@@ -31,8 +31,8 @@ function getTeamAsHTML(team) {
 
 function getTeamAsHTMLInputs({ id, promotion, members, name, url }) {
   return `<tr>
-    <td style = "text-align:center"> 
-      <input type="checkbox" name="selectAll" value="${id}" />
+    <td style="text-align: center">
+      <input type="checkbox" name="selected" value="${id}" />
     </td>
     <td>
       <input value="${promotion}" type="text" name="promotion" placeholder="Enter Promotion" required/>
@@ -179,6 +179,12 @@ function initEvents() {
     const teams = filterElements(allTeams, search);
     console.info("search", search, teams);
     renderTeams(teams);
+  });
+
+  $("#selectAll").addEventListener("input", e => {
+    document.querySelectorAll("input[name=selected]").forEach(check => {
+      check.checked = e.target.checked;
+    });
   });
 
   $(form).addEventListener("submit", onSubmit);
