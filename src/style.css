@@ -118,7 +118,7 @@ footer {
   position: relative;
 }
 .loading-mask::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -135,7 +135,6 @@ footer {
     transform: rotate(359deg);
   }
 }
-
 .loading-mask::after {
   content: "💠";
   text-align: center;
