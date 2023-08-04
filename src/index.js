@@ -133,16 +133,16 @@ async function onSubmit(e) {
     }
     unmask(form);
   } else {
-    createTeamRequest(team).then(({ success, id }) => {
-      if (success) {
-        team.id = id;
-        allTeams = [...allTeams, team];
-        renderTeams(allTeams);
-        $(form).reset();
-      }
-      unmask(form);
-    });
+    const { success, id } = await createTeamRequest(team);
+    if (success) {
+      team.id = id;
+      allTeams = [...allTeams, team];
+      renderTeams(allTeams);
+      $(form).reset();
+    }
+    unmask(form);
   }
+  unmask(form);
 }
 
 function startEdit(id) {
